@@ -1,5 +1,5 @@
 package com.example.viikkotehtava1.Domain
-
+/*
 fun addTask(list: List<Task>, task: Task) : List<Task>{
     return list + task
 }
@@ -22,3 +22,4 @@ fun sortByDueDate(list: List<Task>) : List<Task>{
     val byDueDate = list.sortedBy { it.dueDate }
     return byDueDate
 }
+*/
