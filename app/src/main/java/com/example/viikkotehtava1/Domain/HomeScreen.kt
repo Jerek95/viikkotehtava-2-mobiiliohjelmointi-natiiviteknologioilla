@@ -3,7 +3,6 @@ package com.example.viikkotehtava1.Domain
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,15 +24,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, viewModel: TaskViewModel = viewModel()){
-    viewModel.init()
-    val taskList = viewModel.tasks
+    //viewModel.init()
+    val taskList: List<Task> = viewModel.tasks
 
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        items(taskList){
+        items(1){
             taskList.forEach { task ->
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -45,34 +44,37 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: TaskViewModel = viewMod
                     Button(
                         onClick = {} //taskList.remove(task)
                     )
-                    { Text("Poista Tehtävä") }
+                    { Text("Delete") }
                 }
 
             }
-            var text by remember { mutableStateOf("") }
-            TextField(
-                value = text,
-                onValueChange = { text = it },
-                label = { Text("Enter name") }
-            )
-            Button(
-                onClick = {viewModel.addTask(
-                    Task(viewModel.tasks.size + 1, text, text, 1, "", false)
-                )}
-            )
-            { Text("Lisää Tehtävä")}
+
             Column(
                 modifier = Modifier.fillMaxSize().padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
+                var text by remember { mutableStateOf("") }
+                TextField(
+                    value = text,
+                    onValueChange = { text = it },
+                    label = { Text("Enter name") }
+                )
+                Button(
+                    onClick = {viewModel.addTask(
+                        Task(viewModel.tasks.size + 1, text, text, 1, "", false)
+                    )}
+                )
+                { Text("Add Task")}
                 Button(onClick = { viewModel.filterByDone(false) }) {
                     Text("Filter By Done")
                 }
                 Button(onClick = { viewModel.sortByDueDate() }) {
                     Text("Sort By Due Date")
                 }
-
+                Button(onClick = { viewModel.reset() }) {
+                    Text("Reset")
+                }
             }
         }
     }
