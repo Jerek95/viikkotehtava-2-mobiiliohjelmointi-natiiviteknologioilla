@@ -24,7 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, viewModel: TaskViewModel = viewModel()){
-    //viewModel.init()
+
     val taskList: List<Task> = viewModel.tasks
 
     LazyColumn(
